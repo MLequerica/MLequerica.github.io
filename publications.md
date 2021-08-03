@@ -14,7 +14,7 @@ Bueno, F. G. B., Kendall, L., de Araujo Alves, D., Tamara, M. L., Heard, T. A., 
 
 Dunn, L., Lequerica, M., Reid, C. R., & Latty, T. (2020). Dual ecosystem services of syrphid flies (Diptera: Syrphidae): pollinators and biological control agents. Pest Management Science, 76(6), 1973–1979. https://doi.org/10.1002/ps.5807
 
-Lequerica, M. (2012). Sucesión temprana en el bosque Altoandino [BSc Thesis]. Uniandes.
+Lequerica, M. (2012). Sucesión temprana en el bosque Altoandino [BSc Thesis]. Universidad de Los Andes.
 
 Lequerica, M. (2018). Urbanisation and environmental modification as drivers of insect community diversity and composition in Sydney, Australia [Master’s Thesis]. University of Sydney.
 
