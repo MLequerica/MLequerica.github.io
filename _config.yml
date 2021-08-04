@@ -18,7 +18,7 @@ navbar-links:
   Publications: "publications"
   Outreach: "outreach"
   Blog: "blog"
-  Photos: "photos"
+  Media: "media"
 
 # --- Logo --- #
 
@@ -39,10 +39,10 @@ round-avatar: true
 # Select the social network links that you want to show in the footer.
 # Uncomment the links you want to show and add your information to each one.
 social-network-links:
-  email: "someone@example.com"
+  email: "manuel.lequerica@sydney.edu.au"
   github: thomased
-  ORCID: https://orcid.org/0000-0002-3976-1734
-# google-scholar: your google scholar
+  ORCID: https://orcid.org/0000-0002-1044-3820
+# google-scholar: https://scholar.google.com.co/citations?user=SICDhGMAAAAJ&hl=en 
 # facebook: deanattali
 # twitter: daattali
 # patreon: DeanAttali
