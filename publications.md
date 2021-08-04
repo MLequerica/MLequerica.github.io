@@ -11,6 +11,7 @@ White TE, Latty T (2020) Flies improve the salience of iridescent sexual signals
 | [pdf]({{ site.url }}/documents/white_latty_2020_flies_improve_the_salience_of_iridescent_sexual_signals_by_orienting_toward_the_sun.pdf) |
 
 Bueno, F. G. B., Kendall, L., de Araujo Alves, D., Lequerica Tamara, M., Heard, T. A., Latty, T., & Gloag, R. (2021). Stingless bee floral visitation in the global tropics and subtropics. _BioRxiv_. https://doi.org/10.1101/2021.04.26.440550
+| [pdf]({{ site.url }}/documents/bueno_et_al_2021_stingless_bee_floral_visitation_in_the_global_tropics_and_subtropics.pdf) |
 
 Dunn, L., Lequerica, M., Reid, C. R., & Latty, T. (2020). Dual ecosystem services of syrphid flies (Diptera: Syrphidae): pollinators and biological control agents. _Pest Management Science_, 76(6), 1973–1979. https://doi.org/10.1002/ps.5807
 
