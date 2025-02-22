@@ -85,36 +85,171 @@
         </div>
     </section>
 
-    <!-- Photography -->
-    <section id="photos" class="py-16 bg-gray-50">
-        <div class="max-w-6xl mx-auto px-4">
-            <h2 class="text-3xl font-bold text-gray-800 mb-8">Photography</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Replace these placeholder images with your actual photos -->
-                <div class="overflow-hidden rounded-lg shadow-md">
-                    <img src="/api/placeholder/400/300" alt="Urban Wildlife" class="w-full h-64 object-cover">
-                    <div class="p-4 bg-white">
-                        <h3 class="font-semibold text-lg mb-2">Urban Wildlife</h3>
-                        <p class="text-gray-600">Documenting biodiversity in city spaces</p>
+<!-- Photos Section -->
+<section id="photos" class="py-16 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+        <h2 class="text-3xl font-bold text-gray-800 mb-8">Photos</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Urban Wildlife Slideshow -->
+            <div class="overflow-hidden rounded-lg shadow-md slideshow-wrapper">
+                <div class="slideshow-container relative h-64">
+                    <img src="/api/placeholder/400/300" alt="Urban Wildlife 1" class="slideshow-image w-full h-64 object-cover">
+                    <img src="/api/placeholder/400/300" alt="Urban Wildlife 2" class="slideshow-image w-full h-64 object-cover hidden">
+                    <img src="/api/placeholder/400/300" alt="Urban Wildlife 3" class="slideshow-image w-full h-64 object-cover hidden">
+                    
+                    <!-- Navigation Buttons -->
+                    <button class="nav-btn prev-btn hidden">❮</button>
+                    <button class="nav-btn next-btn hidden">❯</button>
+                    
+                    <!-- Navigation Dots -->
+                    <div class="nav-dots hidden">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
                     </div>
                 </div>
-                <div class="overflow-hidden rounded-lg shadow-md">
-                    <img src="/api/placeholder/400/300" alt="Hover Flies" class="w-full h-64 object-cover">
-                    <div class="p-4 bg-white">
-                        <h3 class="font-semibold text-lg mb-2">Hover Flies</h3>
-                        <p class="text-gray-600">Close-up studies of urban pollinators</p>
-                    </div>
-                </div>
-                <div class="overflow-hidden rounded-lg shadow-md">
-                    <img src="/api/placeholder/400/300" alt="Colombian Forests" class="w-full h-64 object-cover">
-                    <div class="p-4 bg-white">
-                        <h3 class="font-semibold text-lg mb-2">Colombian Forests</h3>
-                        <p class="text-gray-600">Forest restoration and biodiversity</p>
-                    </div>
+                <div class="p-4 bg-white">
+                    <h3 class="font-semibold text-lg mb-2">Urban Wildlife</h3>
+                    <p class="text-gray-600">Documenting biodiversity in city spaces</p>
                 </div>
             </div>
+            
+            <!-- Add similar structure for other categories -->
         </div>
-    </section>
+    </div>
+</section>
+
+<style>
+.slideshow-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.slideshow-image {
+    position: absolute;
+    transition: opacity 0.5s ease-in-out;
+    width: 100%;
+    height: 100%;
+}
+
+.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 8px 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    z-index: 10;
+    transition: opacity 0.3s;
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+.nav-dots {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.dot.active {
+    background: white;
+}
+
+.slideshow-wrapper:hover .nav-btn,
+.slideshow-wrapper:hover .nav-dots {
+    display: block;
+}
+</style>
+
+<script>
+function initSlideshows() {
+    const slideshowWrappers = document.querySelectorAll('.slideshow-wrapper');
+    
+    slideshowWrappers.forEach(wrapper => {
+        let currentImageIndex = 0;
+        let slideInterval = null;
+        const container = wrapper.querySelector('.slideshow-container');
+        const images = container.querySelectorAll('.slideshow-image');
+        const prevBtn = container.querySelector('.prev-btn');
+        const nextBtn = container.querySelector('.next-btn');
+        const dots = container.querySelectorAll('.dot');
+        
+        function showImage(index) {
+            images.forEach(img => img.classList.add('hidden'));
+            dots.forEach(dot => dot.classList.remove('active'));
+            images[index].classList.remove('hidden');
+            dots[index].classList.add('active');
+            currentImageIndex = index;
+        }
+        
+        function nextImage() {
+            showImage((currentImageIndex + 1) % images.length);
+        }
+        
+        function prevImage() {
+            showImage((currentImageIndex - 1 + images.length) % images.length);
+        }
+        
+        // Add event listeners
+        wrapper.addEventListener('mouseenter', () => {
+            slideInterval = setInterval(nextImage, 3000);
+            prevBtn.classList.remove('hidden');
+            nextBtn.classList.remove('hidden');
+            container.querySelector('.nav-dots').classList.remove('hidden');
+        });
+        
+        wrapper.addEventListener('mouseleave', () => {
+            clearInterval(slideInterval);
+            prevBtn.classList.add('hidden');
+            nextBtn.classList.add('hidden');
+            container.querySelector('.nav-dots').classList.add('hidden');
+        });
+        
+        prevBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            prevImage();
+        });
+        
+        nextBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            nextImage();
+        });
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => showImage(index));
+        });
+    });
+}
+
+// Initialize slideshows when the page loads
+document.addEventListener('DOMContentLoaded', initSlideshows);
+</script>
 
     <!-- Awards -->
     <section class="py-16 bg-white">
@@ -134,8 +269,8 @@
         </div>
     </section>
 
-    <!-- Publications -->
-<section id="publications" class="py-16 bg-white">
+<!-- Publications -->
+<section id="publications" class="py-16 bg-gray-50">
     <div class="max-w-6xl mx-auto px-4">
         <h2 class="text-3xl font-bold text-gray-800 mb-8">Publications</h2>
         
@@ -155,7 +290,41 @@
                     </p>
                 </div>
 
-                <!-- Continue with other published papers... -->
+                <div class="bg-white rounded-lg p-4">
+                    <p class="text-gray-800">Bueno, F. G. B., Kendall, L., de Araujo Alves, D., <strong>Lequerica Tamara, M.</strong>, Heard, T. A., Latty, T., & Gloag, R. (2023). Stingless bee floral visitation in the global tropics and subtropics. <em>Global Ecology and Conservation</em>, 43, e02454.
+                        <a href="https://doi.org/10.1016/j.gecco.2023.e02454" class="text-blue-600 hover:text-blue-800">https://doi.org/10.1016/j.gecco.2023.e02454</a>
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg p-4">
+                    <p class="text-gray-800">Santangelo, J. S., [...] <strong>Lequerica Tamara, M.</strong>, [...], & Johnson, M. T. J. (2022). Global urban environmental change drives adaptation in white clover. <em>Science</em> 375 (6586), 1275-1281.
+                        <a href="https://doi.org/10.1126/science.abk0989" class="text-blue-600 hover:text-blue-800">https://doi.org/10.1126/science.abk0989</a>
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg p-4">
+                    <p class="text-gray-800"><strong>Lequerica Tamara, M. E.</strong>, Latty, T., Threlfall, C. G., & Hochuli, D. F. (2021). Major insect groups show distinct responses to local and regional attributes of urban green spaces. <em>Landscape and Urban Planning</em>, 216, 104238.
+                        <a href="https://doi.org/10.1016/j.landurbplan.2021.104238" class="text-blue-600 hover:text-blue-800">https://doi.org/10.1016/j.landurbplan.2021.104238</a>
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg p-4">
+                    <p class="text-gray-800">Dunn, L., <strong>Lequerica, M.</strong>, Reid, C.R., Latty, T. (2020). Dual ecosystem services of syrphid flies (Diptera: Syrphidae): pollinators and biological control agents. <em>Pest Management Science</em>.
+                        <a href="https://doi.org/10.1002/ps.5807" class="text-blue-600 hover:text-blue-800">https://doi.org/10.1002/ps.5807</a>
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg p-4">
+                    <p class="text-gray-800"><strong>Lequerica, M.</strong>, Bernal, M., Stevenson, P. (2017). Directionality Evidence in High Andean Forest Early Successional Process. <em>Colombia Forestal</em> 20(1).
+                        <a href="http://dx.doi.org/10.14483/udistrital.jour.colomb.for.2017.1.a06" class="text-blue-600 hover:text-blue-800">http://dx.doi.org/10.14483/udistrital.jour.colomb.for.2017.1.a06</a>
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-lg p-4">
+                    <p class="text-gray-800"><strong>Lequerica, M.</strong>, McInnes, R. (2016). Evaluation of the Upgrade Effects in Four Sewage Treatment Plants in NSW, Australia. <em>Water e-journal</em> 2(1).
+                        <a href="https://doi.org/10.21139/wej.2016.017" class="text-blue-600 hover:text-blue-800">https://doi.org/10.21139/wej.2016.017</a>
+                    </p>
+                </div>
             </div>
         </div>
 
@@ -166,7 +335,9 @@
                 <div class="bg-white rounded-lg p-4">
                     <p class="text-gray-800">Barrero-Flores V., Bello-Rodriguez, J. A., Pinel, E. J., <strong>Lequerica Tamara, M. E.</strong>, & Stevenson P.R. Plants that allocate more resources to flower production yield more fruit at local and global scales.</p>
                 </div>
-                <!-- Add other papers under review... -->
+                <div class="bg-white rounded-lg p-4">
+                    <p class="text-gray-800"><strong>Lequerica Tamara, M. E.</strong>, Latty, T., Threlfall, C. G., & Hochuli, D. F. Floral resource overlap between a dominant hover fly (<em>Melangyna</em>) and the introduced European honeybee (<em>Apis mellifera</em>) in urban greenspaces.</p>
+                </div>
             </div>
         </div>
 
@@ -177,7 +348,15 @@
                 <div class="bg-white rounded-lg p-4">
                     <p class="text-gray-800">Paris-Lombana, C., <strong>Lequerica Tamara, M. E.</strong>, Cárdenas, S., Stevenson, P.R. Seed dispersal modes in primary and secondary forests in La Fortuna (Medina, Cundinamarca) Colombia.</p>
                 </div>
-                <!-- Add other papers in preparation... -->
+                <div class="bg-white rounded-lg p-4">
+                    <p class="text-gray-800">Estrada Bedoya, V., <strong>Lequerica Tamara, M. E.</strong>, Cárdenas, S., Stevenson, P.R. Recambio de especies de mamíferos y aves durante un proceso de restauración en la Reserva La Fortuna (Medina, Cundinamarca).</p>
+                </div>
+                <div class="bg-white rounded-lg p-4">
+                    <p class="text-gray-800"><strong>Lequerica Tamara, M. E.</strong>, Latty, T., Threlfall, C. G., & Hochuli, D. F. Habitat exploration and foraging in a dominant hover fly (<em>Melangyna</em>) is sex-dependent.</p>
+                </div>
+                <div class="bg-white rounded-lg p-4">
+                    <p class="text-gray-800"><strong>Lequerica Tamara, M. E.</strong>, Latty, T., Threlfall, C., Hochuli, D. Environmental modification affects insects' ability to discover floral resources in urban contexts.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -196,7 +375,7 @@
                 <a href="mailto:manuel.lequerica@sydney.edu.au" class="text-blue-600 hover:text-blue-800">manuel.lequerica@sydney.edu.au</a>
             </p>
             <p class="text-gray-600 mt-2">
-                <a href="https://www.sydney.edu.au/science/about/our-people/academic-staff/manuel-lequerica.html" class="text-blue-600 hover:text-blue-800">University of Sydney Profile</a>
+                <a href="https://www.sydney.edu.au/science/about/our-people/academic-staff/manuel-lequerica.html" class="text-blue-600 hover:text-blue-800">The University of Sydney Profile</a>
             </p>
         </div>
     </div>
